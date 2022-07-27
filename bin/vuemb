@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const download = require('download-git-repo');
+const packageJson = require('../package.json');
+
+
+program
+    .command('create <name>')
+    .description('请输入项目名称')
+    .action(name => {
+        console.log('\n 开始下载... \n')
+        download(
+            'TianCai250/vue3-mobile-project',
+            name,	// path
+            err => {
+              if (err) {
+                console.log(`下载失败. ${err}`)
+                return
+              }
+              // 结束加载
+              console.log('\n 下载完成!')
+            }
+        );
+    });
+
+program.version(packageJson.version);
+
+program.parse(process.argv);
